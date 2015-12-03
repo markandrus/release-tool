@@ -1,6 +1,6 @@
 {
   "name": "rt",
-  "version": "0.1.0-rc3",
+  "version": "0.1.0-dev",
   "description": "Release Tool (RT)",
   "main": "lib/index.js",
   "bin": {
