@@ -1,6 +1,6 @@
 {
   "name": "jsrt",
-  "version": "0.1.0-rc2",
+  "version": "0.1.0-dev",
   "description": "JavaScript Release Tool (JSRT)",
   "main": "lib/index.js",
   "bin": {
