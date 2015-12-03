@@ -24,5 +24,8 @@
     "semver": "^5.1.0",
     "shell-quote": "^1.4.3",
     "simple-git": "^1.16.0"
+  },
+  "devDependencies": {
+    "release-tool": "https://github.com/markandrus/release-tool.git"
   }
 }
