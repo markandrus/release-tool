@@ -1,0 +1,15 @@
+{
+  "release": {
+    "commands": [
+      "git add .",
+      "git commit -m \"Release ${RELEASE_VERSION}\"",
+      "git tag ${RELEASE_VERSION}"
+    ]
+  },
+  "development": {
+    "commands": [
+      "git add .",
+      "git commit -m \"Continue development on ${NEXT_DEVELOPMENT_VERSION}\""
+    ]
+  }
+}
