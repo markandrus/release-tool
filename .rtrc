@@ -1,6 +1,8 @@
 {
   "release": {
     "commands": [
+      "git config --global user.name 'travis-ci'",
+      "git config --global user.email 'travis@travis-ci.org'",
       "git add .",
       "git commit -m \"Release ${RELEASE_VERSION}\"",
       "git tag ${RELEASE_VERSION}",
