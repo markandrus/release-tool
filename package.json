@@ -1,0 +1,27 @@
+{
+  "name": "jsrt",
+  "version": "0.1.0-dev",
+  "description": "JavaScript Release Tool (JSRT)",
+  "main": "lib/index.js",
+  "bin": {
+    "jsrt": "./jsrt"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "travis",
+    "travis-ci",
+    "ci",
+    "release"
+  ],
+  "author": "Mark Andrus Roberts <markandrusroberts@gmail.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "inquirer": "^0.11.0",
+    "semver": "^5.1.0",
+    "simple-git": "^1.16.0"
+  }
+}
