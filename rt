@@ -20,6 +20,7 @@ program
   .option('-l, --local', 'run in client mode, but perform the steps normally ' +
                          'run by the server')
   .option('-t, --token', 'specify the Travis CI token')
+  .option('-r, --repo', 'specify the repository')
   .parse(process.argv);
 
 run(program);
