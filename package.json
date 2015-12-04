@@ -1,10 +1,10 @@
 {
   "name": "release-tool",
   "version": "0.1.0-dev",
-  "description": "Release Tool (RT)",
+  "description": "Release Tool",
   "main": "lib/index.js",
   "bin": {
-    "rt": "./rt"
+    "release": "./release"
   },
   "scripts": {
     "test": "echo \"Warn: no test specified\""
