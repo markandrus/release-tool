@@ -1,0 +1,39 @@
+{
+  "type": "JavaScript",
+  "travis": true,
+  "env": {
+    "REPO": "markandrus/release-tool",
+    "GH_REF": "markandrus/release-tool.git"
+  },
+  "plans": {
+    "release": {
+      "env": {
+        "GIT_USER_NAME": "travis-ci",
+        "GIT_USER_EMAIL": "travis@travis-ci.org"
+      },
+      "commands": [
+        "./node_modules/.bin/release bump ${CURRENT_VERSION} ${RELEASE_VERSION}",
+        "git config --global user.name \"${GIT_USER_NAME}\"",
+        "git config --global user.email \"${GIT_USER_EMAIL}\"",
+        "git add .",
+        "git commit -m \"Release ${RELEASE_VERSION}\"",
+        "git tag ${RELEASE_VERSION}",
+      ]
+    },
+    "development": {
+      "commands": [
+        "./node_modules/.bin/release bump ${RELEASE_VERSION} ${DEVELOPMENT_VERSION}",
+        "git add .",
+        "git commit -m \"Continue development on ${DEVELOPMENT_VERSION}\"",
+        "git push \"https://${GH_TOKEN}@${GH_REF}\" ${BRANCH}"
+      ]
+    },
+    "publish": {
+      "commands": [
+        "git push \"https://${GH_TOKEN}@${GH_REF}\" ${BRANCH} --tags",
+        "git checkout ${RELEASE_VERSION}",
+        "npm publish"
+      ]
+    }
+  }
+}
