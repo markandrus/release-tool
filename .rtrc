@@ -1,22 +1,19 @@
 {
   "release": {
     "commands": [
-      "sh -c \"echo ${DEPLOY_KEY} >deploy_key\"",
-      "chmod 600 deploy_key",
-      "ssh-add deploy_key",
       "git config --global user.name 'travis-ci'",
       "git config --global user.email 'travis@travis-ci.org'",
       "git add .",
       "git commit -m \"Release ${RELEASE_VERSION}\"",
       "git tag ${RELEASE_VERSION}",
-      "git push --tags"
+      "git push --quiet --tags \"https://${DEPLOY_KEY}@${GH_REF}\" >/dev/null 2>&1"
     ]
   },
   "development": {
     "commands": [
       "git add .",
       "git commit -m \"Continue development on ${NEXT_DEVELOPMENT_VERSION}\"",
-      "git push"
+      "git push --quiet \"https://${DEPLOY_KEY}@${GH_REF}\" >/dev/null 2>&1"
     ]
   }
 }
