@@ -1,7 +1,7 @@
 {
   "release": {
     "commands": [
-      "echo ${DEPLOY_KEY} >deploy_key",
+      "sh \"echo ${DEPLOY_KEY} >deploy_key\"",
       "chmod 600 deploy_key",
       "ssh-add deploy_key",
       "git config --global user.name 'travis-ci'",
