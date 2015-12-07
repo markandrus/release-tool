@@ -3,7 +3,7 @@
   "travis": true,
   "slug": "markandrus/release-tool",
   "env": {
-    "GH_REF": "markandrus/release-tool.git"
+    "GH_REF": "github.com/markandrus/release-tool.git"
   },
   "plans": {
     "release": {
