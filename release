@@ -1,26 +1,3 @@
 #!/usr/bin/env node
-
-var package = require('./package');
-var program = require('commander');
-var run = require('./lib');
-
-program
-  .version(package.version)
-  .description('Use this command to build and release a JavaScript project ' +
-               'with Travis CI.\n  The tool has some strong expectations ' +
-               'about how the JavaScript project is\n  organized, how it is ' +
-               'built, etc. See the README for more information. If\n  ' +
-               'unspecified on the command-line, this tool checks for ' +
-               'RELEASE_VERSION and\n  NEXT_DEVELOPMENT_VERSION in the ' +
-               'environment.')
-  .usage('[Options...] [RELEASE_VERSION] [NEXT_DEVELOPMENT_VERSION]')
-  .option('-s, --server', 'run in server mode; by default, this tool ' +
-                          'operates as a\n               client and merely ' +
-                          'triggers the server to perform the build')
-  .option('-l, --local', 'run in client mode, but perform the steps normally ' +
-                         'run by the server')
-  .option('-t, --token', 'specify the Travis CI token')
-  .option('-r, --repo', 'specify the repository')
-  .parse(process.argv);
-
-run(program);
+'use strict';
+require('./lib')(process);
