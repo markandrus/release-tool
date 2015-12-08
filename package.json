@@ -1,6 +1,6 @@
 {
   "name": "release-tool",
-  "version": "0.2.1-dev",
+  "version": "0.2.1",
   "description": "Release Tool",
   "main": "lib/index.js",
   "bin": {
