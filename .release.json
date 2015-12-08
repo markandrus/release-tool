@@ -30,7 +30,8 @@
     "publish": {
       "commands": [
         "git remote set-url origin \"https://${GH_TOKEN}@${GH_REF}\"",
-        "git push origin ${BRANCH}:${BRANCH} --tags",
+        "git rebase HEAD ${BRANCH}",
+        "git push origin ${BRANCH} --tags",
         "git checkout ${RELEASE_VERSION}"
       ]
     }
