@@ -1,34 +1,61 @@
-release
-=======
+release-tool
+============
 
-release is a tool for releasing software. It supports bumping version numbers
-in JavaScript projects out-of-the-box, but is otherwise generic enough to
-release any kind of software.
+[![NPM](https://nodei.co/npm/release-tool.png?downloads=true&stars=true)](https://nodei.co/npm/release-tool/)
+
+[![Build Status](https://secure.travis-ci.org/markandrus/release-tool.svg)](http://travis-ci.org/markandrus/release-tool)
+
+release-tool is a tool for releasing software. It supports bumping version
+numbers in JavaScript projects out-of-the-box, but is otherwise generic enough
+to release any kind of software.
 
 ```
-npm install --save-dev release
+npm install --save-dev release-tool
 ```
 
 Usage
 -----
 
-By default, the tool runs in an interactive client mode. It will prompt you for
-the version numbers and plans you want to execute before confirming whether or
-not to proceed.
+By default, the tool runs in an interactive mode. It will prompt you for the
+version numbers and plans you want to execute before confirming whether or not
+to proceed.
 
 ```
 $ ./node_modules/.bin/release --help
+
+  Usage: release [Options...] [CURRENT_VERSION] [RELEASE_VERSION|NEXT_VERSION] \
+             [DEVELOPMENT_VERSION]
+
+  release is a tool for releasing software. It supports bumping version numbers
+  in JavaScript projects out-of-the-box, but is otherwise generic enough to
+  release any kind of software. Run release with no arguments for interactive
+  mode.
+
+  For more information, refer to the README.
+
+  Options:
+
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -b, --branch [branch]  the branch to release from (defaults to the current branch)
+    --bump                 bump CURRENT_VERSION to NEXT_VERSION
+    -n, --non-interactive  run in non-interactive mode (e.g., in a script)
+    -p, --publish          execute the publish plan
+    -s, --slug             specify the repository slug (owner_name/repo_name)
+    -t, --token            assign the Travis CI token to use
+    -x, --execute          execute the plans (defaults to true unless using Travis CI)
+
 ```
 
-### bump
+### --bump
 
 The tool also bundles a "bump" subcommand for updating version numbers in
 supported types of software projects (currently only JavaScript). It will bump
 the version number in package.json (and bower.json, if it exists) from version
-`FROM` to version `TO`:
+`CURRENT_VERSION` to version `NEXT_VERSION`:
 
 ```
-$ ./node_modules/.bin/release bump ${FROM} ${TO}
+$ ./node_modules/.bin/release --bump ${CURRENT_VERSION} ${NEXT_VERSION}
 ```
 
 .release.json
@@ -45,7 +72,7 @@ what should happen in each plan.
 
 For example, the tool's own [.release.json](.release.json) specifies that, in
 order to create a Release, the version number must be bumped before committing
-and tagging the Software. In order to continue a Development Version, the
+and tagging the software. In order to continue a Development Version, the
 version number must be bumped before committing the Software.
 
 
@@ -53,9 +80,9 @@ version number must be bumped before committing the Software.
 {
   "type": "JavaScript",
   "travis": true,
+  "slug": "markandrus/release-tool",
   "env": {
-    "REPO": "markandrus/release-tool",
-    "GH_REF": "markandrus/release-tool.git"
+    "GH_REF": "github.com/markandrus/release-tool.git"
   },
   "plans": {
     "release": {
@@ -64,27 +91,27 @@ version number must be bumped before committing the Software.
         "GIT_USER_EMAIL": "travis@travis-ci.org"
       },
       "commands": [
-        "./node_modules/.bin/release bump ${CURRENT_VERSION} ${RELEASE_VERSION}",
-        "git config --global user.name \"${GIT_USER_NAME}\"",
-        "git config --global user.email \"${GIT_USER_EMAIL}\"",
+        "node ./node_modules/.bin/release --bump ${CURRENT_VERSION} ${RELEASE_VERSION}",
+        "git config user.name \"${GIT_USER_NAME}\"",
+        "git config user.email \"${GIT_USER_EMAIL}\"",
         "git add .",
         "git commit -m \"Release ${RELEASE_VERSION}\"",
-        "git tag ${RELEASE_VERSION}",
+        "git tag ${RELEASE_VERSION}"
       ]
     },
     "development": {
       "commands": [
-        "./node_modules/.bin/release bump ${RELEASE_VERSION} ${DEVELOPMENT_VERSION}",
+        "node ./node_modules/.bin/release --bump ${RELEASE_VERSION} ${DEVELOPMENT_VERSION}",
         "git add .",
-        "git commit -m \"Continue development on ${DEVELOPMENT_VERSION}\"",
-        "git push \"https://${GH_TOKEN}@${GH_REF}\" ${BRANCH}"
+        "git commit -m \"Continue development on ${DEVELOPMENT_VERSION}\""
       ]
     },
     "publish": {
       "commands": [
-        "git push \"https://${GH_TOKEN}@${GH_REF}\" ${BRANCH} --tags",
-        "git checkout ${RELEASE_VERSION}",
-        "npm publish"
+        "git remote set-url origin \"https://${GH_TOKEN}@${GH_REF}\"",
+        "git rebase HEAD ${BRANCH}",
+        "git push origin ${BRANCH} --tags",
+        "git checkout ${RELEASE_VERSION}"
       ]
     }
   }
