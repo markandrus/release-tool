@@ -17,6 +17,10 @@
   ],
   "author": "Mark Andrus Roberts <markandrusroberts@gmail.com>",
   "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markandrus/release-tool.git"
+  },
   "dependencies": {
     "colors": "^1.1.2",
     "commander": "^2.9.0",
