@@ -128,6 +128,7 @@ Travis CI
 
 If you set the property "travis" to `true` in the top-level of your software's
 .release.json, then the tool will not execute any plans locally; instead, it
-will POST a request to Travis CI in order to execute the plans.
+will POST a request to Travis CI in order to execute the plans. You can also
+set the property to "pro".
 
 Be very careful not to leak any sensitive data.
